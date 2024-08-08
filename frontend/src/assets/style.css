@@ -1,0 +1,57 @@
+.background-footer {
+    background-color: #783D1A;
+  }
+  
+.footer {
+    padding: 2rem 0;
+    width: 100%;
+}
+  
+.footer a {
+    color: black;
+}
+  
+.bg-fond {
+    background-color: #783D1A !important;
+}
+  
+.bg-form {
+    background-color: #BA9371 !important;
+}
+  
+.text-color {
+    color: #783D1A !important;
+}
+  
+.btn-login,
+.btn-color {
+    background-color: #C56929 !important;
+    border: none;
+}
+  
+.min-vh-50 {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+  
+.background-page {
+    background-color: #BA9371;
+}
+  
+.background-nav {
+    background-color: #C56929;
+}
+  
+.nav-link {
+    color: #783D1A !important;
+}
+  
+.navbar-brand img {
+    height: 40px;
+}
+  
+.form-select {
+    background-color: #783D1A;
+}
+  
