@@ -5,7 +5,6 @@
         <h1 class="display-4 text-white">{{ $t('welcome') }}</h1>
         <img src="../../img/icone.png" alt="Gluten Hack Logo" height="100" class="mb-3">
         <p class="lead text-white">{{ $t('home') }}</p>
-        <button class="btn-color rounded text-white" @click="navigateToRegister">{{ $t('getStarted') }}</button>
       </div>
     </div>
   </div>

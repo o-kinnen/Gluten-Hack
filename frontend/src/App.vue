@@ -10,11 +10,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+            <li class="nav-item" v-if="!isAuthenticated">
               <router-link to="/register" class="nav-link text-white">{{ $t('createAccount') }}</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!isAuthenticated">
               <router-link to="/login" class="nav-link text-white">{{ $t('login') }}</router-link>
+            </li>
+            <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/map" class="nav-link text-white">Carte</router-link>
+            </li>
+            <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/profile" class="nav-link text-white">Profil</router-link>
             </li>
             <li class="nav-item">
               <select v-model="$i18n.locale" class="form-select">
@@ -34,12 +40,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import FooterPage from './components/FooterPage.vue'
 
 export default {
   name: 'App',
   components: {
     FooterPage
+  },
+  computed: {
+    ...mapState(['isAuthenticated'])
   }
 }
 </script>
@@ -58,7 +68,7 @@ export default {
 }
 
 .navbar-brand img {
-  height: 40px; /* Adjust the height of the logo as needed */
+  height: 40px;
 }
 
 .form-select {

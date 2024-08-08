@@ -59,6 +59,7 @@ export default {
         const data = await response.json()
         if (response.ok) {
           localStorage.setItem('token', data.token)
+          this.$store.dispatch('login')
           this.$router.push('/profile')
         } else {
           this.errorMessage = data.message || 'Échec de la connexion. Veuillez vérifier votre email et votre mot de passe.'

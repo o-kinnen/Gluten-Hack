@@ -45,6 +45,7 @@ export default {
     },
     logout () {
       localStorage.removeItem('token')
+      this.$store.dispatch('logout')
       this.$router.push('/')
     }
   },
