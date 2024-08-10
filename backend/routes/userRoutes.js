@@ -21,4 +21,7 @@ router.post('/send-reset-link', userController.sendResetLink);
 // Route pour réinitialiser le mot de passe avec le token
 router.post('/reset-password', userController.resetPassword);
 
+// Route pour supprimer le compte utilisateur
+router.delete('/delete', authMiddleware, userController.deleteUser);
+
 module.exports = router;

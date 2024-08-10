@@ -28,6 +28,10 @@ const User = {
       [newPassword, email]
     );
     return result.rows[0];
+  },
+  delete: async (id) => {
+    const result = await pool.query('DELETE FROM public."User" WHERE id_user = $1 RETURNING *', [id]);
+    return result.rows[0];
   }
 };
 

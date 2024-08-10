@@ -122,3 +122,17 @@ exports.resetPassword = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+    await User.delete(userId);
+    res.status(200).json({ message: 'Compte supprimé avec succès.' });
+  } catch (error) {
+    next(error);
+  }
+};
