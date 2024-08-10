@@ -6,6 +6,7 @@ import UserProfile from '../components/UserProfile.vue'
 import ResetPassword from '../components/ResetPassword.vue'
 import ResetPasswordForm from '../components/ResetPasswordForm.vue'
 import MapView from '../components/MapView.vue'
+import ScanView from '../components/ScanView.vue'
 
 const routes = [
   { path: '/', name: 'HomePage', component: HomePage },
@@ -14,7 +15,8 @@ const routes = [
   { path: '/profile', name: 'UserProfile', component: UserProfile },
   { path: '/reset-password', name: 'ResetPassword', component: ResetPassword },
   { path: '/reset-password-form', component: ResetPasswordForm },
-  { path: '/map', name: 'Map', component: MapView, meta: { requiresAuth: true } }
+  { path: '/map', name: 'Map', component: MapView, meta: { requiresAuth: true } },
+  { path: '/scan', name: 'ScanView', component: ScanView, meta: { requiresAuth: true } }
 ]
 
 const router = createRouter({

@@ -68,18 +68,3 @@ export default {
   }
 }
 </script>
-<style>
-.bg-fond {
-  background-color: #783D1A !important;
-}
-.bg-form {
-  background-color: #BA9371 !important;
-}
-.text-color {
-  color: #783D1A !important;
-}
-.btn-login {
-  background-color: #C56929 !important;
-  border: none;
-}
-</style>

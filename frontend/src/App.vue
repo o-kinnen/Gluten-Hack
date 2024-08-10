@@ -17,6 +17,9 @@
               <router-link to="/login" class="nav-link text-white">{{ $t('login') }}</router-link>
             </li>
             <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/scan" class="nav-link text-white">Scan</router-link>
+            </li>
+            <li class="nav-item" v-if="isAuthenticated">
               <router-link to="/map" class="nav-link text-white">Carte</router-link>
             </li>
             <li class="nav-item" v-if="isAuthenticated">
@@ -53,25 +56,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.background-page {
-  background-color: #BA9371;
-}
-
-.background-nav {
-  background-color: #C56929;
-}
-
-.nav-link {
-  color: #783D1A !important;
-}
-
-.navbar-brand img {
-  height: 40px;
-}
-
-.form-select {
-  background-color: #783D1A;
-}
-</style>

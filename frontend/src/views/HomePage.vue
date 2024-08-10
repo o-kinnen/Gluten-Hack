@@ -20,11 +20,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-/* Ajoutez vos styles ici si nécessaire */
-.btn-color {
-  background-color: #783D1A;
-  border: none;
-}
-</style>

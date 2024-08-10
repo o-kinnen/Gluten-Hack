@@ -1,5 +1,3 @@
-//Ce fichier contient la logique pour gérer les requêtes utilisateur.
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -76,10 +74,8 @@ exports.sendResetLink = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
-
     const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '15m' });
     const resetLink = `http://localhost:8080/reset-password-form?token=${token}`;
-
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -87,16 +83,13 @@ exports.sendResetLink = async (req, res, next) => {
         pass: process.env.EMAIL_PASS
       }
     });
-
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email,
       subject: 'Réinitialisation du mot de passe',
       text: `Cliquez sur ce lien pour réinitialiser votre mot de passe : ${resetLink}`
     };
-
     await transporter.sendMail(mailOptions);
-
     res.status(200).json({ message: 'Email de réinitialisation envoyé.' });
   } catch (error) {
     next(error);
@@ -106,11 +99,9 @@ exports.sendResetLink = async (req, res, next) => {
 exports.resetPassword = async (req, res, next) => {
   try {
     const { token, newPassword } = req.body;
-
     if (!token || !newPassword) {
       return res.status(400).json({ message: 'Token et nouveau mot de passe sont requis.' });
     }
-
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -120,17 +111,12 @@ exports.resetPassword = async (req, res, next) => {
       }
       return res.status(400).json({ message: 'Token invalide.' });
     }
-
-    const user = await User.findByEmail(decoded.email);
-    
+    const user = await User.findByEmail(decoded.email); 
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
-
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-
     await User.updatePassword(user.email, hashedPassword);
-
     res.status(200).json({ success: true, message: 'Mot de passe réinitialisé avec succès.' });
   } catch (error) {
     next(error);

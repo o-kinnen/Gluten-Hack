@@ -1,5 +1,3 @@
-//Ce fichier contient les requêtes SQL pour accéder aux données de la table Utilisateur.
-
 const pool = require('../utils/database');
 
 const User = {
@@ -8,11 +6,13 @@ const User = {
     return result.rows;
   },
   findByEmail: async (email) => {
-    const result = await pool.query('SELECT * FROM public."User" WHERE email = $1', [email]);
+    const result = await pool.query('SELECT * FROM public."User" WHERE email = $1', 
+      [email]);
     return result.rows[0];
   },
   findById: async (id) => {
-    const result = await pool.query('SELECT * FROM public."User" WHERE id_user = $1', [id]);
+    const result = await pool.query('SELECT * FROM public."User" WHERE id_user = $1', 
+      [id]);
     return result.rows[0];
   },
   create: async (user) => {
@@ -32,4 +32,3 @@ const User = {
 };
 
 module.exports = User;
-

@@ -1,5 +1,3 @@
-//Ce fichier configure la connexion à la base de données.
-
 const path = require('path');
 
 require('dotenv').config({
@@ -8,7 +6,6 @@ require('dotenv').config({
 });
 
 const {Pool, Client} = require('pg');
-
 const pool = new Pool({
     host :  process.env.HOST,
     user : process.env.USER,

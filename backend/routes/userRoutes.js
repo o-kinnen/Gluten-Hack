@@ -1,5 +1,3 @@
-//Ce fichier contient les définitions des routes utilisateur.
-
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
@@ -22,6 +20,5 @@ router.post('/send-reset-link', userController.sendResetLink);
 
 // Route pour réinitialiser le mot de passe avec le token
 router.post('/reset-password', userController.resetPassword);
-
 
 module.exports = router;
