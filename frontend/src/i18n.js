@@ -3,26 +3,26 @@ import { createI18n } from 'vue-i18n'
 const messages = {
   en: {
     welcome: 'Welcome to Gluten Hack',
-    home: 'This is the home page.',
-    getStarted: 'Get Started',
     restaurantMenu: 'Restaurant Menu',
     createAccount: 'Create Account',
     login: 'Login',
-    policy: 'Policy'
+    policy: 'Policy',
+    welcomeForm: 'Welcome back !',
+    password: 'Password'
   },
   fr: {
-    welcome: 'Bienvenue à Gluten Hack',
-    home: 'Ceci est la page d\'accueil.',
-    getStarted: 'Commencer',
+    welcome: 'Bienvenue sur Gluten Hack',
     restaurantMenu: 'Carte restaurant',
     createAccount: 'Créer un compte',
     login: 'Connexion',
-    policy: 'Politique'
+    policy: 'Politique',
+    welcomeForm: 'Te revoilà !',
+    password: 'Mot de passe'
   }
 }
 
 const i18n = createI18n({
-  locale: 'en', // langue par défaut
+  locale: 'fr',
   messages
 })
 

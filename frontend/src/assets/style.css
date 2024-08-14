@@ -55,7 +55,43 @@
     background-color: #783D1A;
 }
 
-#map {
+.map-container {
+    border: 5px solid #783D1A;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 75%;
+    width: 75%;
+}
+  
+  .map-content {
+    height: 100%;
     width: 100%;
-    height: 100vh;
-  }
+}
+
+.btn-login:hover,
+.btn-color:hover,
+.btn-login:active,
+.btn-color:active,
+.btn-login:focus,
+.btn-color:focus {
+    background-color: #C56929;
+    color: #783D1A;
+    outline: none;
+    box-shadow: none;
+}
+
+.card-body {
+    background-color: #783D1A;
+    border: 5px solid #783D1A;
+    border-radius: 15px;
+    overflow: hidden;
+}
+  
+.card-custom {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #783D1A;
+    border-radius: 15px;
+}
+  

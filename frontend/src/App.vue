@@ -2,9 +2,9 @@
   <div id="app" class="d-flex flex-column min-vh-100 background-page">
     <nav class="navbar navbar-expand-lg navbar-light background-nav">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <router-link class="navbar-brand" to="/">
           <img src="../img/logo.png" alt="Gluten Hack Logo">
-        </a>
+        </router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -16,6 +16,9 @@
             <li class="nav-item" v-if="!isAuthenticated">
               <router-link to="/login" class="nav-link text-white">{{ $t('login') }}</router-link>
             </li>
+            <!-- <li class="nav-item" v-if="isAuthenticated">
+            <router-link class="nav-link text-white" to="/vrac">Vrac</router-link>
+           </li> -->
             <li class="nav-item" v-if="isAuthenticated">
               <router-link to="/scan" class="nav-link text-white">Scan</router-link>
             </li>

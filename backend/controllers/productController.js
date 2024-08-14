@@ -1,5 +1,19 @@
 const Product = require('../models/productModel');
 
+exports.checkProduct = async (req, res, next) => {
+  try {
+    const { barcode } = req.params;
+    const existingProduct = await Product.findByBarcode(barcode);
+    if (existingProduct) {
+      res.status(200).json(existingProduct);
+    } else {
+      res.status(404).json({ message: 'Produit non trouvé dans la base de données.' });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.addProduct = async (req, res) => {
   try {
     const { name, code_barre, gluten } = req.body;

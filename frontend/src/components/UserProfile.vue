@@ -6,10 +6,12 @@
         <h3 class="text-white">Bienvenue {{ name }} !</h3>
       </div>
       <div class="text-center">
-        <p class="text-white">Votre adresse email : {{ email }}</p>
-        <button @click="logout" class="btn-color rounded text-white">Se déconnecter</button>
-        <button @click="deleteAccount" class="btn-color rounded text-white">Supprimer le compte</button>
+        <button @click="logout" class="btn btn-color rounded text-white mb-3">Se déconnecter</button>
       </div>
+      <div class="text-center">
+        <button @click="deleteAccount" class="btn btn-color rounded text-white">Supprimer le compte</button>
+      </div>
+      <div v-if="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
     </div>
   </div>
 </template>
@@ -27,11 +29,8 @@ export default {
   methods: {
     async fetchProfile () {
       try {
-        const token = localStorage.getItem('token')
         const response = await fetch('http://localhost:3000/users/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+          credentials: 'include'
         })
         const data = await response.json()
         if (response.ok) {
@@ -39,25 +38,34 @@ export default {
           this.email = data.email
         } else {
           this.errorMessage = data.message || 'Erreur lors de la récupération des informations du profil.'
+          this.$router.push('/login')
         }
       } catch (error) {
         this.errorMessage = 'Erreur lors de la communication avec le serveur. Veuillez réessayer plus tard.'
       }
     },
-    logout () {
-      localStorage.removeItem('token')
-      this.$store.dispatch('logout')
-      this.$router.push('/')
+    async logout () {
+      try {
+        const response = await fetch('http://localhost:3000/users/logout', {
+          method: 'POST',
+          credentials: 'include'
+        })
+        if (response.ok) {
+          this.$store.dispatch('logout')
+          this.$router.push('/login')
+        } else {
+          this.errorMessage = 'Erreur lors de la déconnexion.'
+        }
+      } catch (error) {
+        this.errorMessage = 'Erreur lors de la déconnexion.'
+      }
     },
     async deleteAccount () {
       if (confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
         try {
-          const token = localStorage.getItem('token')
-          const response = await fetch('http://localhost:3000/users/delete', {
+          const response = await fetch(`${process.env.VUE_APP_URL_BACKEND}/users/delete`, {
             method: 'DELETE',
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+            credentials: 'include'
           })
           if (response.ok) {
             alert('Votre compte a été supprimé avec succès.')
@@ -66,7 +74,6 @@ export default {
             this.errorMessage = 'Erreur lors de la suppression du compte.'
           }
         } catch (error) {
-          console.error('Erreur lors de la suppression du compte :', error)
           this.errorMessage = 'Erreur lors de la suppression du compte.'
         }
       }

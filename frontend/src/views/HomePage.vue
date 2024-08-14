@@ -3,8 +3,7 @@
     <div class="row">
       <div class="col-12 col-md-8 offset-md-2 text-center">
         <h1 class="display-4 text-white">{{ $t('welcome') }}</h1>
-        <img src="../../img/icone.png" alt="Gluten Hack Logo" height="100" class="mb-3">
-        <p class="lead text-white">{{ $t('home') }}</p>
+        <img src="../../img/icone.gif" alt="Gluten Hack Logo" height="400" class="mb-3">
       </div>
     </div>
   </div>

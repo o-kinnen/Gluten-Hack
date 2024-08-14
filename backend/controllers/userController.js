@@ -22,7 +22,13 @@ exports.registerUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({ name, email, password: hashedPassword });
     const token = jwt.sign({ id: newUser.id_user, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.status(201).json({ token });
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV,
+      sameSite: 'Strict',
+      maxAge: 3600000
+    });
+    res.status(201).json({ message: 'Utilisateur enregistré avec succès' });
   } catch (error) {
     next(error);
   }
@@ -42,7 +48,13 @@ exports.loginUser = async (req, res, next) => {
       return res.status(401).json({ message: 'Mot de passe incorrect.' });
     }
     const token = jwt.sign({ id: user.id_user, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({ token });
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV,
+      sameSite: 'Strict',
+      maxAge: 3600000
+    });
+    res.status(200).json({ message: 'Connexion réussie' });
   } catch (error) {
     console.error('Error logging in user:', error);
     next(error);
@@ -51,15 +63,15 @@ exports.loginUser = async (req, res, next) => {
 
 exports.getUserProfile = async (req, res, next) => {
   try {
-    console.log('getUserProfile called');
-    const userId = req.user.id;
-    console.log('User ID:', userId);
-    const user = await User.findById(userId);
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ message: 'Accès non autorisé' });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
     if (!user) {
-      console.log('User not found');
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
-    console.log('User found:', user);
     res.status(200).json({ name: user.name, email: user.email });
   } catch (error) {
     console.log('Error:', error);
@@ -75,7 +87,7 @@ exports.sendResetLink = async (req, res, next) => {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
     const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '15m' });
-    const resetLink = `http://localhost:8080/reset-password-form?token=${token}`;
+    const resetLink = `${process.env.URL_FRONTEND}/reset-password-form?token=${token}`;
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -87,7 +99,7 @@ exports.sendResetLink = async (req, res, next) => {
       from: process.env.EMAIL_USER,
       to: user.email,
       subject: 'Réinitialisation du mot de passe',
-      text: `Cliquez sur ce lien pour réinitialiser votre mot de passe : ${resetLink}`
+      text: `Cliquez sur ce lien pour réinitialiser votre mot de passe (valide pendant 15 minutes) : ${resetLink}.`
     };
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Email de réinitialisation envoyé.' });
@@ -132,6 +144,19 @@ exports.deleteUser = async (req, res, next) => {
     }
     await User.delete(userId);
     res.status(200).json({ message: 'Compte supprimé avec succès.' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.logoutUser = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Déconnexion réussie' });
+};
+
+exports.checkAuth = async (req, res, next) => {
+  try {
+    res.status(200).json({ authenticated: true });
   } catch (error) {
     next(error);
   }

@@ -7,7 +7,8 @@
       <form @submit.prevent="sendResetLink">
         <div class="mb-3">
           <label for="email" class="form-label text-white">Email</label>
-          <input type="email" v-model="email" class="form-control" id="email" placeholder="exemple@domaine.com">
+          <input type="email" v-model="email" class="form-control" id="email" placeholder="exemple@domaine.com" :class="{'is-invalid': v$.email.$error}" @blur="v$.email.$touch()" >
+          <div v-if="v$.email.$error" class="invalid-feedback">L'email doit être valide.</div>
         </div>
         <div v-if="errorMessage" class="alert alert-danger" role="alert">
           {{ errorMessage }}
@@ -16,7 +17,7 @@
           {{ successMessage }}
         </div>
         <div class="d-grid gap-2 mt-3">
-          <button type="submit" class="btn btn-login rounded text-white">Réinitialiser le mot de passe</button>
+          <button type="submit" class="btn btn-login rounded text-white" :disabled="v$.$invalid">Réinitialiser le mot de passe</button>
         </div>
       </form>
     </div>
@@ -24,6 +25,9 @@
 </template>
 
 <script>
+import useVuelidate from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
+
 export default {
   name: 'ResetPassword',
   data () {
@@ -33,15 +37,31 @@ export default {
       successMessage: ''
     }
   },
+  validations () {
+    return {
+      email: { required, email }
+    }
+  },
+  setup () {
+    const v$ = useVuelidate()
+    return { v$ }
+  },
   methods: {
     async sendResetLink () {
       this.errorMessage = ''
       this.successMessage = ''
+      this.v$.$touch()
+
+      if (this.v$.$invalid) {
+        return
+      }
+
       try {
-        const response = await fetch('http://localhost:3000/users/send-reset-link', {
+        const response = await fetch(`${process.env.VUE_APP_URL_BACKEND}/users/send-reset-link`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: this.email })
+          body: JSON.stringify({ email: this.email }),
+          credentials: 'include'
         })
         const data = await response.json()
         if (data.success) {
