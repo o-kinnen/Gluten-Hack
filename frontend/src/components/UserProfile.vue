@@ -29,7 +29,7 @@ export default {
   methods: {
     async fetchProfile () {
       try {
-        const response = await fetch('http://localhost:3000/users/profile', {
+        const response = await fetch(`${process.env.VUE_APP_URL_BACKEND}/users/profile`, {
           credentials: 'include'
         })
         const data = await response.json()
@@ -46,7 +46,7 @@ export default {
     },
     async logout () {
       try {
-        const response = await fetch('http://localhost:3000/users/logout', {
+        const response = await fetch(`${process.env.VUE_APP_URL_BACKEND}/users/logout`, {
           method: 'POST',
           credentials: 'include'
         })
