@@ -1,0 +1,97 @@
+.background-footer {
+    background-color: #C56929;
+  }
+  
+.footer {
+    padding: 2rem 0;
+    width: 100%;
+}
+  
+.footer a {
+    color: black;
+}
+  
+.bg-fond {
+    background-color: #783D1A;
+}
+  
+.bg-form {
+    background-color: #BA9371;
+}
+  
+.text-color {
+    color: #783D1A;
+}
+  
+.btn-login,
+.btn-color {
+    background-color: #C56929;
+    border: none;
+}
+  
+.min-vh-50 {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+  
+.background-page {
+    background-color: #BA9371;
+}
+  
+.background-nav {
+    background-color: #C56929;
+}
+  
+.nav-link {
+    color: #783D1A;
+}
+  
+.navbar-brand img {
+    height: 40px;
+}
+  
+.form-select {
+    background-color: #783D1A;
+}
+
+.map-container {
+    border: 5px solid #783D1A;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 75%;
+    width: 75%;
+}
+  
+  .map-content {
+    height: 100%;
+    width: 100%;
+}
+
+.btn-login:hover,
+.btn-color:hover,
+.btn-login:active,
+.btn-color:active,
+.btn-login:focus,
+.btn-color:focus {
+    background-color: #C56929;
+    color: #783D1A;
+    outline: none;
+    box-shadow: none;
+}
+
+.card-body {
+    background-color: #783D1A;
+    border: 5px solid #783D1A;
+    border-radius: 15px;
+    overflow: hidden;
+}
+  
+.card-custom {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #783D1A;
+    border-radius: 15px;
+}
+  

@@ -1,0 +1,61 @@
+<template>
+  <div id="app" class="d-flex flex-column min-vh-100 background-page">
+    <nav class="navbar navbar-expand-lg navbar-light background-nav">
+      <div class="container-fluid">
+        <router-link class="navbar-brand" to="/">
+          <img src="../img/logo.png" alt="Gluten Hack Logo">
+        </router-link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item" v-if="!isAuthenticated">
+              <router-link to="/register" class="nav-link text-white">{{ $t('createAccount') }}</router-link>
+            </li>
+            <li class="nav-item" v-if="!isAuthenticated">
+              <router-link to="/login" class="nav-link text-white">{{ $t('login') }}</router-link>
+            </li>
+            <!-- <li class="nav-item" v-if="isAuthenticated">
+            <router-link class="nav-link text-white" to="/vrac">Vrac</router-link>
+           </li> -->
+            <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/scan" class="nav-link text-white">Scan</router-link>
+            </li>
+            <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/map" class="nav-link text-white">Carte</router-link>
+            </li>
+            <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/profile" class="nav-link text-white">Profil</router-link>
+            </li>
+            <li class="nav-item">
+              <select v-model="$i18n.locale" class="form-select">
+                <option value="en" >English</option>
+                <option value="fr">Français</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container flex-grow-1 mt-4">
+      <router-view />
+    </div>
+    <FooterPage />
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import FooterPage from './components/FooterPage.vue'
+
+export default {
+  name: 'App',
+  components: {
+    FooterPage
+  },
+  computed: {
+    ...mapState(['isAuthenticated'])
+  }
+}
+</script>
