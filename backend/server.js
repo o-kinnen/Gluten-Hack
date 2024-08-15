@@ -1,5 +1,7 @@
 const http = require('http');
 const app = require('./app');
+const path = require('path');
+
 require('dotenv').config();
 
 const normalizePort = val => {
@@ -37,6 +39,15 @@ const errorHandler = error => {
 };
 
 const server = http.createServer(app);
+
+// Serve les fichiers statiques du dossier dist
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Toutes les autres routes renvoient vers le fichier index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+});
+
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
