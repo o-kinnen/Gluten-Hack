@@ -144,7 +144,7 @@ export default {
     async loadFoursquareRestaurants (longitude, latitude) {
       try {
         const response = await fetch(
-          `https://api.foursquare.com/v3/places/search?ll=${latitude},${longitude}&categories=13065&query=gluten-free&limit=10`, // 13065 = restaurants
+          `https://api.foursquare.com/v3/places/search?ll=${latitude},${longitude}&categories=13065&query=gluten-free&limit=10`,
           {
             headers: {
               Accept: 'application/json',
