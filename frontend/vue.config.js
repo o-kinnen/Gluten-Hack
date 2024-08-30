@@ -16,7 +16,7 @@ module.exports = defineConfig({
       '^/api': {
         target: process.env.VUE_APP_URL_BACKEND,
         changeOrigin: true,
-        secure: false // Utilisé uniquement si vous avez un certificat auto-signé
+        secure: false
       }
     }
   }

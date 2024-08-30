@@ -16,9 +16,9 @@
             <li class="nav-item" v-if="!isAuthenticated">
               <router-link to="/login" class="nav-link text-white">{{ $t('login') }}</router-link>
             </li>
-            <!-- <li class="nav-item" v-if="isAuthenticated">
-            <router-link class="nav-link text-white" to="/vrac">Vrac</router-link>
-           </li> -->
+           <li class="nav-item" v-if="isAuthenticated">
+              <router-link to="/news" class="nav-link text-white">News</router-link>
+            </li>
             <li class="nav-item" v-if="isAuthenticated">
               <router-link to="/scan" class="nav-link text-white">Scan</router-link>
             </li>
@@ -28,12 +28,15 @@
             <li class="nav-item" v-if="isAuthenticated">
               <router-link to="/profile" class="nav-link text-white">Profil</router-link>
             </li>
+            <!--
             <li class="nav-item">
               <select v-model="$i18n.locale" class="form-select">
                 <option value="en" >English</option>
                 <option value="fr">Français</option>
+                <option value="nd">Nederlands</option>
               </select>
             </li>
+          -->
           </ul>
         </div>
       </div>
