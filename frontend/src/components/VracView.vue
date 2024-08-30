@@ -24,14 +24,16 @@
 </template>
 
 <script>
-import axios from 'axios'
+import Clarifai from 'clarifai'
+
 export default {
   name: 'VracView',
   data () {
     return {
       detectedItem: '',
       videoElement: null,
-      photoTaken: false
+      photoTaken: false,
+      clarifaiApiKey: process.env.VUE_APP_CLARIFAI_API_KEY
     }
   },
   mounted () {
@@ -56,19 +58,24 @@ export default {
       canvas.height = video.videoHeight * scaleFactor
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.photoTaken = true
-      const dataURL = canvas.toDataURL('image/jpeg', 0.7)
+      const dataURL = canvas.toDataURL('image/jpeg', 0.7).split(',')[1]
+      console.log(process.env.VUE_APP_CLARIFAI_API_KEY)
+      const app = new Clarifai.App({
+        apiKey: this.clarifaiApiKey
+      })
+
       try {
-        const response = await axios.post(
-          `${process.env.VUE_APP_URL_BACKEND}/api/recognize-food`,
-          {
-            image: dataURL.split(',')[1]
-          }
+        const response = await app.models.predict(
+          Clarifai.FOOD_MODEL,
+          { base64: dataURL }
         )
-        const labels = response.data.labels
-        labels.sort((a, b) => b.score - a.score)
-        const topLabel = labels.find(label => label.score > 0.7)
+
+        const labels = response.outputs[0].data.concepts
+        labels.sort((a, b) => b.value - a.value)
+        const topLabel = labels.find(label => label.value > 0.7)
+
         if (topLabel) {
-          this.detectedItem = topLabel.description
+          this.detectedItem = topLabel.name.toLowerCase()
           console.log('Aliment détecté :', this.detectedItem)
         } else {
           console.log('Aucun aliment spécifique détecté.')

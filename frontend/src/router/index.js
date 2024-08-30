@@ -9,7 +9,7 @@ import MapView from '../components/MapView.vue'
 import ScanView from '../components/ScanView.vue'
 import NotFound from '../components/NotFound.vue'
 import PrivacyPolicy from '../components/PrivacyPolicy.vue'
-// import VracView from '../components/VracView.vue'
+import NewsView from '../components/NewsView.vue'
 import store from '../store'
 
 const routes = [
@@ -22,8 +22,8 @@ const routes = [
   { path: '/reset-password-form', component: ResetPasswordForm },
   { path: '/map', name: 'Map', component: MapView, meta: { requiresAuth: true } },
   { path: '/scan', name: 'ScanView', component: ScanView, meta: { requiresAuth: true } },
-  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
-  // { path: '/vrac', name: 'VracView', component: VracView, meta: { requiresAuth: true } }
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+  { path: '/news', name: 'NewsView', component: NewsView, meta: { requiresAuth: true } }
 ]
 
 const router = createRouter({

@@ -29,6 +29,9 @@
         <p>
           Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment. Nous vous informerons de tout changement important.
         </p>
+        <h3>7. Base de donnée</h3>
+        <p>Les données sur les produits alimentaires proviennent d'Open Food Facts, sous licence Open Database License (ODbL).</p>
+
       </div>
     </div>
   </template>
