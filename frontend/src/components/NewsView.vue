@@ -25,6 +25,7 @@
         <div v-else>
           <p class="text-white">Aucune information disponible pour le moment.</p>
         </div>
+        <p class="text-white mt-4">Données fournies par <a href="https://mediastack.com" target="_blank" class="text-white">Mediastack API</a>.</p>
       </div>
     </div>
   </template>
@@ -42,7 +43,7 @@ export default {
     async fetchGlutenNews () {
       try {
         const response = await fetch(
-          `http://api.mediastack.com/v1/news?access_key=${process.env.VUE_APP_MEDIASTACK_API_KEY}&keywords=gluten&limit=6&sort=published_desc`)
+          `https://api.mediastack.com/v1/news?access_key=${process.env.VUE_APP_MEDIASTACK_API_KEY}&keywords=gluten&limit=6&sort=published_desc`)
         if (!response.ok) {
           throw new Error('Erreur lors de la récupération des informations')
         }

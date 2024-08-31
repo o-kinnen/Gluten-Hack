@@ -1,6 +1,5 @@
 <template>
   <div class="container text-center mt-5">
-    <img src="../../img/scan.gif" alt="Gluten Hack Logo" height="100" class="mb-3">
     <h2 class="text-white">Veuillez entrer ou scanner un code-barres</h2>
     <div class="row justify-content-center">
       <div class="col-md-6">
@@ -97,7 +96,7 @@ export default {
           type: 'LiveStream',
           target: document.querySelector('#interactive'),
           constraints: {
-            facingMode: 'user'
+            facingMode: 'environment'
           }
         },
         decoder: {

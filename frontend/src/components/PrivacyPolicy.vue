@@ -19,7 +19,7 @@
         </p>
         <h3>4. Vos droits</h3>
         <p>
-          Vous avez le droit d'accéder, de corriger ou de supprimer vos informations personnelles à tout moment.
+          Vous avez le droit d'accéder ou de supprimer vos informations personnelles à tout moment.
         </p>
         <h3>5. Sécurité</h3>
         <p>
@@ -29,9 +29,6 @@
         <p>
           Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment. Nous vous informerons de tout changement important.
         </p>
-        <h3>7. Base de donnée</h3>
-        <p>Les données sur les produits alimentaires proviennent d'Open Food Facts, sous licence Open Database License (ODbL).</p>
-
       </div>
     </div>
   </template>

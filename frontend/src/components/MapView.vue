@@ -2,7 +2,6 @@
   <div class="container text-center d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
     <div class="d-flex align-items-center mb-4">
       <h1 class="text-white">Trouver un restaurant</h1>
-      <img src="../../img/map.gif" alt="Gluten Hack Logo" height="60" class="ms-3">
     </div>
     <div class="d-flex mb-4 align-items-center" style="width: 100%; max-width: 600px;">
       <input v-model="searchLocation" @blur="v$.searchLocation.$touch()" type="text" class="form-control" placeholder="Entrez un lieu situé en Belgique (ville, adresse)" :class="{'is-invalid': v$.searchLocation.$error}">
@@ -13,6 +12,9 @@
     </div>
     <div class="map-container rounded">
       <div id="map" class="map-content"></div>
+    </div>
+    <div class="text-white mt-4">
+      <p>Données fournies par <a href="https://www.yelp.com" target="_blank" class="text-white">Yelp</a> et <a href="https://foursquare.com" target="_blank" class="text-white">Foursquare</a>.</p>
     </div>
   </div>
 </template>
