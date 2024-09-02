@@ -7,6 +7,7 @@ const productRoutes = require('./routes/productRoutes');
 const yelpRouter = require('./routes/yelp');
 const errorHandler = require('./middlewares/errorHandler');
 const imageRecognitionRoutes = require('./routes/imageRecognition');
+
 const app = express();
 
 app.use(cors({
